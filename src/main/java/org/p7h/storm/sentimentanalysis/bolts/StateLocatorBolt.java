@@ -53,9 +53,9 @@ public final class StateLocatorBolt extends BaseRichBolt {
 			LOGGER.error(ioException.getMessage(), ioException);
 			System.exit(1);
 		}
-		//Bolt reads the Bing Maps API Value and stores the same to BING_MAPS_API_KEY_VALUE of Constants.java so that the Bolt can use it.
+		//Bolt reads the Google Maps API Value and stores the same to GOOGLE_MAPS_API_KEY_VALUE of Constants.java so that the Bolt can use it.
 		//For the lack of time I am using this Constant or else using a good Design Pattern, this can be fine-tuned.
-		//For Bing Maps Key: https://www.bingmapsportal.com
+		//For Google Maps Key: https://google-developers.appspot.com/maps/documentation/geocoding/#api_key
 		Constants.GOOGLE_MAPS_API_KEY_VALUE = properties.getProperty(Constants.GOOGLE_MAPS_API_KEY);
 	}
 
@@ -78,8 +78,7 @@ public final class StateLocatorBolt extends BaseRichBolt {
 	}
 
     private static final String[] states = new String[] {"GBR-2001", "GBR-2002", "GBR-2003", "GBR-2004", "GBR-2005",
-            "GBR-2006", "GBR-2007", "GBR-2008", "GBR-2009", "GBR-2010", "GBR-2011", "GBR-2012", "GBR-2013", "GBR-2014", "GBR-2015", "GBR-2016", "GBR-2017", "GBR-2018", "GBR-2019", "GBR-2020", "GBR-2021", "GBR-2022", "GBR-2023", "GBR-2024", "GBR-2025", "GBR-2026", "GBR-2028", "GBR-2029", "GBR-2030", "GBR-2031", "GBR-2032",
-            "GBR-2033", "GBR-2034", "GBR-2035"};
+            "GBR-2006", "GBR-2007", "GBR-2008", "GBR-2009", "GBR-2010", "GBR-2011", "GBR-2012", "GBR-2013", "GBR-2014", "GBR-2015", "GBR-2016", "GBR-2017", "GBR-2018", "GBR-2019", "GBR-2020", "GBR-2021", "GBR-2022", "GBR-2023", "GBR-2024", "GBR-2025", "GBR-2026", "GBR-2028", "GBR-2029", "GBR-2030", "GBR-2031", "GBR-2032", "GBR-2033", "GBR-2034", "GBR-2035"};
     static Random random = new Random();
 
 	/**
@@ -89,8 +88,8 @@ public final class StateLocatorBolt extends BaseRichBolt {
 	 * @return State of the Tweet.
 	 */
 	private final Optional<String> getStateFromTweet(final Status status) {
-//		String state = getStateFromTweetGeoLocation(status);
-        String state = states[random.nextInt(states.length)];
+		String state = getStateFromTweetGeoLocation(status);
+        // String state = states[random.nextInt(states.length)];
 
 		if(null == state) {
 			//LOGGER.info("Skipping invalid State: {}.", state);
@@ -116,11 +115,11 @@ public final class StateLocatorBolt extends BaseRichBolt {
 		if (null != geoLocation) {
 			latitude = geoLocation.getLatitude();
 			longitude = geoLocation.getLongitude();
-//			LOGGER.debug("LatLng for BingMaps:{} and {}", latitude, longitude);
+//			LOGGER.debug("LatLng for Google Maps:{} and {}", latitude, longitude);
 			final Optional<String> stateGeoOptional = GoogleMapsLookup.reverseGeocodeFromLatLong(latitude, longitude);
 			if(stateGeoOptional.isPresent()){
 				final String stateFromGeoLocation = stateGeoOptional.get();
-				LOGGER.debug("State from BingMaps:{}", stateFromGeoLocation);
+				LOGGER.debug("State from GoogleMaps:{}", stateFromGeoLocation);
                 state = Constants.MAP_STATE_CODE_NAME.getOrDefault(stateFromGeoLocation, null);
 			}
 		}

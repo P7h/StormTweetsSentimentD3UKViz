@@ -19,14 +19,14 @@ This application has been tested in:<br>
 * Application retrieves tweets using Twitter Streaming API (using [Twitter4J](http://twitter4j.org)).<br>
 * It analyses sentiments of all the tweets originating from UK.
 * There are three different objects within a tweet that we can use to determine it’s origin. This application tries to find the location using all the three options and prioritizes location received in the following order [high to low]:
-	* The coordinates object.
-	* The place object.
-	* The user object.
+	* The coordinates object. -- I solely rely on the coordinates object of a tweet in this project.
+	* The place object. -- Not considered in this project.
+	* The user object. -- Not considered in this project.
 * For reverse geocoding, this application uses Google Maps API. 
 	* For more information and sign up, please check [Google Maps API page](https://google-developers.appspot.com/maps/documentation/geocoding/#ReverseGeocoding).
 	* Please note that you would need Google account for signing up for [Google Maps API key](https://google-developers.appspot.com/maps/documentation/geocoding/#api_key).
-	* Also, for [previous reverse geocoding](https://github.com/P7h/StormTweetsSentimentD3Viz), I chose Bing Maps and not Google Maps since Google Maps is too restrictive for our usage, as it has a limit of only 2500 requests per day. But Bing's geocoding for UK is really not upto the mark. Google Maps API is far better and translates almost every latlong request to a place. So, I have gone with Google Maps API due to accuracy. 
-    * Just for the perspective, Bing Maps could convert only 3 out of 400 latlong request to a location. While Google Maps API converted almost 95% of the latlong requests to a location.
+	* Also, for [previous reverse geocoding requirements](https://github.com/P7h/StormTweetsSentimentD3Viz), I chose Bing Maps and not Google Maps since Google Maps is too restrictive for our usage, as it has a limit of only 2500 requests per day and Bing allows 50k requests per day. But Bing's geocoding for UK is really not upto the mark. Google Maps API is far better and translates almost every latlong request to a place. So, I have gone with Google Maps API for this project due to the greater accuracy.
+    * Just for the perspective, Bing Maps could convert only 3 out of 400 latlong requests to a location. While Google Maps API converted almost 95% of the latlong requests to a location.
 * This application uses [AFINN](http://www2.imm.dtu.dk/pubdb/views/publication_details.php?id=6010) which contains a list of pre-computed sentiment scores.
 	* These words are used to determine sentiment of the each tweet which is retrieved using Streaming API.
 * By understanding sentiment values, we can get the most happiest county / region of UK and most unhappiest county / region as well.
@@ -34,14 +34,17 @@ This application has been tested in:<br>
 * This codebase has been updated with decent comments, wherever required.
 * Also this project has been made compatible with both Eclipse IDE and IntelliJ IDEA. Import the project in your favorite IDE [which has Maven plugin installed] and you can quickly follow the code.
 
-## Demo
-* WIP
+## Demo of UK Twitter Sentiment Visualization
+### GIF of D3 Choropleth Visualization
+
+### Screenshot of D3 Choropleth Visualization
+![Screenshot of D3 Visualization](D3_Viz.png)
 
 ## Configuration
 * Please check the [`config.properties`](src/main/resources/config.properties#L3-6) and add your own values and complete the integration of Twitter API to your application by looking at your values from [Twitter Developer Page](https://dev.twitter.com/apps).<br>
 	* If you did not create a Twitter App before, then please create a new Twitter App where you will get all the required values of `config.properties` afresh and then populate them here without any mistake.<br>
-* Also please add the value of Bing Maps API Key to [`config.properties`](src/main/resources/config.properties#L10), as that will be used for getting the reverse geocode location using Latitude and Longitude.<br>
-	* If you do not have Bing Maps API Key, please check [Getting Started with Bing Maps](http://msdn.microsoft.com/en-us/library/ff428643.aspx) for signup and other information.<br>
+* Also please add the value of Google Maps API Key to [`config.properties`](src/main/resources/config.properties#L10), as that will be used for getting the reverse geocode location using Latitude and Longitude.<br>
+	* If you do not have Google Maps API Key, please check [Getting Started with Google Maps](https://google-developers.appspot.com/maps/documentation/geocoding/#ReverseGeocoding) for signup and other information.<br>
 * And finally please check [but _do not modify_] the [`AFINN-111.txt`](src/main/resources/AFINN-111.txt) file to see the pre-computed sentiment scores of ~2500 words / phrases.
 	* For more info on AFINN, please check its [`AFINN-README.txt`](src/main/resources/AFINN-README.txt) and also check his [paper](http://www2.imm.dtu.dk/pubdb/views/publication_details.php?id=6010).
 
@@ -67,7 +70,7 @@ You need the following on your machine:
 * Python v2.7.x installed on the machine for triggering the visualization.
 * Clone this repo and import as an existing Maven project to either Eclipse IDE or IntelliJ IDEA.
 * This application uses [Google Guava](https://code.google.com/p/guava-libraries) for making life simple while using Collections and other generic stuff.
-* This application also uses [Jackson](http://jackson.codehaus.org) for unmarshalling the JSON response got from Bing Maps API.
+* This application also uses [Jackson](http://jackson.codehaus.org) for unmarshalling the JSON response got from Google Maps API.
 * Requires ZooKeeper, JZMQ, ZeroMQ installed and configured in case of executing this project in distributed mode i.e. Storm Cluster.<br>
 	- Follow the steps mentioned [here](https://github.com/nathanmarz/storm/wiki/Setting-up-a-Storm-cluster) for more details on setting up a Storm Cluster.<br>
 

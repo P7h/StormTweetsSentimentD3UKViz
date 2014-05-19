@@ -4,153 +4,75 @@
 
 <style>
 
-    .subunit.IRL,
-    .subunit-label.IRL {
-        display: none;
-    }
+.subunit.IRL,
+.subunit-label.IRL {
+  display: none;
+}
 
-    .subunit-boundary {
-        fill: none;
-        stroke: #777;
-        stroke-dasharray: 1,1;
-        stroke-linejoin: round;
-    }
+.subunit-boundary {
+  fill: none;
+  stroke: #777;
+  stroke-dasharray: 1,1;
+  stroke-linejoin: round;
+}
 
-    .subunit-boundary.IRL {
-        stroke: #aaa;
-    }
+.subunit-boundary.IRL {
+  stroke: #aaa;
+}
 
-    .subunit-label {
-        fill: #777;
-        fill-opacity: .5;
-        font-size: 20px;
-        font-weight: 300;
-        text-anchor: middle;
-    }
+.subunit-label {
+  fill: #777;
+  fill-opacity: .5;
+  font-size: 20px;
+  font-weight: 300;
+  text-anchor: middle;
+}
 
-    .place,
-    .place-label {
-        fill: #444;
-    }
+.place,
+.place-label {
+  fill: #444;
+}
 
-    text {
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-        font-size: 10px;
-        pointer-events: none;
-    }
+text {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 10px;
+  pointer-events: none;
+}
 
-    .background {
-        fill: none;
-        pointer-events: all;
-    }
+.background {
+  fill: none;
+  pointer-events: all;
+}
 
-    div.tooltip {
-        color: #222;
-        background: #fff;
-        padding: .5em;
-        text-shadow: #f5f5f5 0 1px 0;
-        border-radius: 2px;
-        box-shadow: 0px 0px 2px 0px #a6a6a6;
-        opacity: 0.9;
-        position: absolute;
-    }
+div.tooltip {
+  color: #222; 
+  background: #fff; 
+  padding: .5em; 
+  text-shadow: #f5f5f5 0 1px 0;
+  border-radius: 2px; 
+  box-shadow: 0px 0px 2px 0px #a6a6a6; 
+  opacity: 0.9; 
+  position: absolute;
+}
 
-    #legend {
-        padding: 1.5em 0 0 1.5em;
-    }
+#legend {
+    padding: 1.5em 0 0 1.5em;
+}
 
-    li.key {
-        border-top-width: 15px;
-        border-top-style: solid;
-        font-size: .75em;
-        width: 10%;
-        padding-left: 0;
-        padding-right: 0;
-    }
-
-     /*OLD CSS Entries*/
-    .chart div {
-        font: 15px Rokkitt;
-        background-color: yellow;
-        text-align: right;
-        padding: 3px;
-        margin: 1px;
-    }
-
-    .chart rect {
-        stroke: white;
-        fill: yellow;
-    }
-
-    .chart text {
-        fill: white;
-    }
-
-    button {
-        font-family: Rokkitt;
-        text-shadow: 0.025em 0.025em 0.025em rgba(0, 0, 0, 0.8);
-    }
-
-    path {
-        fill: none;
-    }
-
-    .land-boundary {
-        stroke-width: 1px;
-    }
-
-    .state-boundary {
-        stroke: #000;
-        stroke-width: 1px;
-    }
-
-    .active {
-        fill: orange;
-    }
-
-    .stroke {
-        fill: none;
-    }
-
-    .fill {
-        fill: black;
-    }
-
-    .boundary {
-        fill: none;
-    }
-
-    .legend {
-        color: white;
-        font-size: 11px;
-    }
-
-    div.tooltip {
-        vertical-align: middle;
-        position: absolute;
-        text-align: center;
-        width: 150px;
-        height: 28px;
-        line-height: 28px;
-        padding: 1px;
-        font-size: 10px;
-        background: #FFFFE0;
-        border: 1px;
-        border-radius: 8px;
-        pointer-events: none;
-        color: black;
-    }
-
-    .states {
-        fill: #e5e5e5;
-    }
-
+li.key {
+    border-top-width: 15px;
+    border-top-style: solid;
+    font-size: .75em;
+    width: 10%;
+    padding-left: 0;
+    padding-right: 0;
+}
 </style>
 <body style="background:#444C57; font-family: Rokkitt; font-size: 1em; text-shadow: 0.025em 0.025em 0.025em rgba(0, 0, 0, 0.8);">
 <center>
     <h1 style="font-family: Rokkitt; color: white;"><b>Real-time Visualization of UK Twitter Sentiment</b></h1>
     <h3 style="font-family: Rokkitt; color: white; text-shadow: 0.025em 0.025em 0.025em rgba(0, 0, 0, 0.8);">
-        <u>Stack</u>: Storm uk, Twitter Streaming API, Google Maps API, JMS, ActiveMQ, Camel, WebSockets and D3.js</h3>
+        <u>Stack</u>: Storm Topology, Twitter Streaming API, Google Maps API, JMS, ActiveMQ, Camel, WebSockets and D3.js</h3>
     <div id="btns" style="width:700px;">
         <button value="Start" id="start" class="btn btn-primary btn-large"
                 style="font-size: 18px; font-family: Rokkitt; text-shadow: 0.025em 0.025em 0.025em rgba(0, 0, 0, 0.8); color:#000000"><span
@@ -296,7 +218,7 @@
                     .attr("d", path)
                     .attr('fill', function(d){
                         //return color(getCount(d.properties.adm1_code, counts));
-                        alert(colors(d.properties.adm1_code in populateById ? populateById[d.properties.adm1_code] : 0));
+                        // alert(colors(d.properties.adm1_code in populateById ? populateById[d.properties.adm1_code] : 0));
                         return colors(d.properties.adm1_code in populateById ? populateById[d.properties.adm1_code] : 0);
                         //return "#DDD";
                     })
@@ -322,21 +244,21 @@
                 .attr("d", path)
                 .attr("class", "subunit-boundary IRL");
 
-            // g.selectAll("text")
-            //         .data(subunits.features)
-            //         .enter()
-            //         .append("text")
-            //         .text(function(d){
-            //             return stateIdAndNameMap[d.id];
-            //         })
-            //         .attr("x", function(d){
-            //             return path.centroid(d)[0];
-            //         })
-            //         .attr("y", function(d){
-            //             return  path.centroid(d)[1];
-            //         })
-            //         .attr("text-anchor","middle")
-            //         .attr('font-size','9pt');
+            g.selectAll("text")
+                    .data(subunits.features)
+                    .enter()
+                    .append("text")
+                    .text(function(d){
+                        return stateIdAndNameMap[d.id];
+                    })
+                    .attr("x", function(d){
+                        return path.centroid(d)[0];
+                    })
+                    .attr("y", function(d){
+                        return  path.centroid(d)[1];
+                    })
+                    .attr("text-anchor","middle")
+                    .attr('font-size','9pt');
 
             g.selectAll(".subunit-label")
                     .data(subunits.features)

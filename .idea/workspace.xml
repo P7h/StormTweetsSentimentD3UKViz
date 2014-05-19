@@ -124,20 +124,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/resources/logback.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/org/p7h/storm/sentimentanalysis/utils/BingMapsLookup.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/p7h/storm/sentimentanalysis/utils/Constants.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/p7h/storm/sentimentanalysis/cameljms/StreamingRoute.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/p7h/storm/sentimentanalysis/spouts/TwitterSpout.java" />
-        <option value="$PROJECT_DIR$/web/US__D3Viz.html" />
-        <option value="$PROJECT_DIR$/src/main/java/org/p7h/storm/sentimentanalysis/topology/SentimentAnalysisTopology.java" />
-        <option value="$PROJECT_DIR$/web/assets/data/uk-counties.tsv" />
-        <option value="$PROJECT_DIR$/src/main/resources/config.properties" />
-        <option value="$PROJECT_DIR$/web/index.html" />
-        <option value="$PROJECT_DIR$/src/main/java/org/p7h/storm/sentimentanalysis/utils/GoogleMapsLookup.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/p7h/storm/sentimentanalysis/bolts/SentimentCalculatorBolt.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/p7h/storm/sentimentanalysis/bolts/StateLocatorBolt.java" />
       </list>
     </option>
   </component>

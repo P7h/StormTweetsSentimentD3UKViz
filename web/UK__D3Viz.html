@@ -1,278 +1,308 @@
 <!DOCTYPE html>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<title>D3 Choropleth Viz of US Twitter Sentiment</title>
+<title>D3 Choropleth Viz of UK Twitter Sentiment</title>
 
 <style>
-    .chart div {
-        font: 15px Rokkitt;
-        background-color: yellow;
-        text-align: right;
-        padding: 3px;
-        margin: 1px;
-    }
 
-    .chart rect {
-        stroke: white;
-        fill: yellow;
-    }
+.subunit.IRL,
+.subunit-label.IRL {
+  display: none;
+}
 
-    .chart text {
-        fill: white;
-    }
+.subunit-boundary {
+  fill: none;
+  stroke: #777;
+  stroke-dasharray: 1,1;
+  stroke-linejoin: round;
+}
 
-    button {
-        font-family: Rokkitt;
-        text-shadow: 0.025em 0.025em 0.025em rgba(0, 0, 0, 0.8);
-    }
+.subunit-boundary.IRL {
+  stroke: #aaa;
+}
 
-    path {
-        fill: none;
-    }
+.subunit-label {
+  fill: #777;
+  fill-opacity: .5;
+  font-size: 20px;
+  font-weight: 300;
+  text-anchor: middle;
+}
 
-    .land-boundary {
-        stroke-width: 1px;
-    }
+.place,
+.place-label {
+  fill: #444;
+}
 
-    .state-boundary {
-        stroke: #000;
-        stroke-width: 1px;
-    }
+text {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 10px;
+  pointer-events: none;
+}
 
-    .active {
-        fill: orange;
-    }
+.background {
+  fill: none;
+  pointer-events: all;
+}
 
-    .stroke {
-        fill: none;
-    }
+div.tooltip {
+  color: #222; 
+  background: #fff; 
+  padding: .5em; 
+  text-shadow: #f5f5f5 0 1px 0;
+  border-radius: 2px; 
+  box-shadow: 0px 0px 2px 0px #a6a6a6; 
+  opacity: 0.9; 
+  position: absolute;
+}
 
-    .fill {
-        fill: black;
-    }
+#legend {
+    padding: 1.5em 0 0 1.5em;
+}
 
-    .boundary {
-        fill: none;
-    }
-
-    .legend {
-        color: white;
-        font-size: 11px;
-    }
-
-    div.tooltip {
-        vertical-align: middle;
-        position: absolute;
-        text-align: center;
-        width: 150px;
-        height: 28px;
-        line-height: 28px;
-        padding: 1px;
-        font-size: 10px;
-        background: #FFFFE0;
-        border: 1px;
-        border-radius: 8px;
-        pointer-events: none;
-        color: black;
-    }
-
-    .states {
-      fill: #e5e5e5;
-    }
-
+li.key {
+    border-top-width: 15px;
+    border-top-style: solid;
+    font-size: .75em;
+    width: 10%;
+    padding-left: 0;
+    padding-right: 0;
+}
 </style>
 <body style="background:#444C57; font-family: Rokkitt; font-size: 1em; text-shadow: 0.025em 0.025em 0.025em rgba(0, 0, 0, 0.8);">
-    <center>
-    <h1 style="font-family: Rokkitt; color: white;"><b>Real-time Visualization of US Twitter Sentiment</b></h1>
-        <h3 style="font-family: Rokkitt; color: white; text-shadow: 0.025em 0.025em 0.025em rgba(0, 0, 0, 0.8);">
-        <u>Stack</u>: Storm Topology, Twitter Streaming API, Bing Maps API, JMS, ActiveMQ, Camel, WebSockets and D3.js</h3>
-        <div id="btns" style="width:700px;">
-            <button value="Start" id="start" class="btn btn-primary btn-large"
-                    style="font-size: 18px; font-family: Rokkitt; text-shadow: 0.025em 0.025em 0.025em rgba(0, 0, 0, 0.8); color:#000000"><span
-                    class="glyphicon glyphicon-play"></span> Start Viz
-            </button>
-            &nbsp;&nbsp;&nbsp;
-            <button value="Stop" id="stop" class="btn btn-warning btn-large"
-                    style="font-size: 18px; font-family: Rokkitt; text-shadow: 0.025em 0.025em 0.025em rgba(0, 0, 0, 0.8); color:#000000"><span
-                    class="glyphicon glyphicon-stop"></span> Stop Viz
-            </button>
-        </div>
-        <div id="chart" style="width:500; height:900;"></div>
-    </center>
-    <script src="assets/js/jquery-2.1.0.min.js"></script>
-    <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Rokkitt'/>
-    <link rel='stylesheet' type='text/css' href="assets/css/bootstrap.min.css"/>
-    <link rel='stylesheet' type='text/css' href="assets/css/bootstrap-responsive.min.css"/>
-    <link rel='stylesheet' type='text/css' href="assets/css/bootstrap-theme.min.css"/>
-    <script src="assets/js/d3.v3.min.js"></script>
-    <script src="assets/js/topojson.v1.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script>
-        if (!window.WebSocket) {
-            alert("WebSocket not supported by this browser");
-        }
-        var labels_for_legend = [ "-50", "0", "50"];
-        var ext_color_domain = [-50, 0, 50];
-        var color=d3.scale.linear().domain(ext_color_domain).range(["#ff0000", "#ffffff", "#00ff00"]).interpolate(d3.interpolateRgb);
-        // var labels_for_legend = [ "<-50", "-35", "-25", "-15", "-5", "0", "5+", "15+", "25+", "35+", ">50"];
-        // var ext_color_domain = [-50, -35, -25, -15, -5, 0, 5, 15, 25, 35, 50];
-        // var color=d3.scale.linear().domain(ext_color_domain).range(["#67001f", "#b2182b", "#d6604d", "#f4a582", "#fddbc7", "#f7f7f7", "#d1e5f0", "#92c5de", "#4393c3", "#2166ac", "#053061"]).interpolate(d3.interpolateRgb);
+<center>
+    <h1 style="font-family: Rokkitt; color: white;"><b>Real-time Visualization of UK Twitter Sentiment</b></h1>
+    <h3 style="font-family: Rokkitt; color: white; text-shadow: 0.025em 0.025em 0.025em rgba(0, 0, 0, 0.8);">
+        <u>Stack</u>: Storm Topology, Twitter Streaming API, Google Maps API, JMS, ActiveMQ, Camel, WebSockets and D3.js</h3>
+    <div id="btns" style="width:700px;">
+        <button value="Start" id="start" class="btn btn-primary btn-large"
+                style="font-size: 18px; font-family: Rokkitt; text-shadow: 0.025em 0.025em 0.025em rgba(0, 0, 0, 0.8); color:#000000"><span
+                class="glyphicon glyphicon-play"></span> Start Viz
+        </button>
+        &nbsp;&nbsp;&nbsp;
+        <button value="Stop" id="stop" class="btn btn-warning btn-large"
+                style="font-size: 18px; font-family: Rokkitt; text-shadow: 0.025em 0.025em 0.025em rgba(0, 0, 0, 0.8); color:#000000"><span
+                class="glyphicon glyphicon-stop"></span> Stop Viz
+        </button>
+    </div>
+    <div id="chart" style="width:900; height:500;"></div>
+</center>
+<script src="assets/js/jquery-2.1.0.min.js"></script>
+<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Rokkitt'/>
+<link rel='stylesheet' type='text/css' href="assets/css/bootstrap.min.css"/>
+<link rel='stylesheet' type='text/css' href="assets/css/bootstrap-responsive.min.css"/>
+<link rel='stylesheet' type='text/css' href="assets/css/bootstrap-theme.min.css"/>
+<script src="assets/js/d3.v3.min.js"></script>
+<script src="assets/js/topojson.v1.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script>
+    if (!window.WebSocket) {
+        alert("WebSocket not supported by this browser");
+    }
+    var color = d3.scale.linear()
+            .domain([0, 100])
+            .range(["#2f2f7f", "#aeaeff"]);
 
-        var width = 900, height = 500;
-        var div = d3.select("body").append("div").attr("class", "tooltip").style("opacity", 0);
-        var path = d3.geo.path();
+    //https://vis4.net/labs/multihue/#colors=darkred, red,orange, ivory, #3CB371,#008000|steps=12|bez=0|coL=0
+    var ext_color_domain = ['#8b0000', '#be0002', '#f40000', '#ff5d00', '#ff9200', '#ffbd59', '#ffe6b8', '#dff2d8', '#8ccf9e', '#39ae68', '#26973c', '#008000'];
+    var colors = d3.scale.quantize()
+            .domain([-50, 50])
+            .range(ext_color_domain);
 
-        var svg = d3.select("#chart").append("svg").attr("width", width).attr("height", height);
+    var width = 1300, height = 700;
 
-        var g = svg.append("g");
-        g.append("defs").append("path").datum({
-            type : "Sphere"
-        }).attr("id", "sphere").attr("d", path);
+    var projection = d3.geo.albers()
+            .center([0, 55.4])
+            .rotate([4.4, 0])
+            .parallels([50, 60])
+            .scale(height * 5)
+            .translate([width / 2, height / 2]);
 
-        g.append("use").attr("class", "stroke").attr("xlink:href", "#sphere");
+    var path = d3.geo.path()
+            .projection(projection)
+            .pointRadius(2);
+    var svg = d3.select("#chart").append("svg")
+            .attr("width", width)
+            .attr("height", height);
 
-        g.append("use").attr("class", "fill").attr("xlink:href", "#sphere");
+    var tooltip = d3.select("body").append("div")
+            .attr("class", "tooltip")
+            .attr("style", "visibility:hidden");
 
-        var populateById = {};
-        var stateIdAndNameMap = {};
-        var stateNameAndIdMap = {};
-        d3.tsv("assets/data/uk-counties.tsv", function(error, states) {
-            states.forEach(function(d) {
-                stateIdAndNameMap[d.id] = d.name;
-                stateNameAndIdMap[d.name] = d.id;
-            });
+    svg.append("rect")
+            .attr("class", "background")
+            .attr("width", width)
+            .attr("height", height)
+            .on("click", reset);
+
+    var g = svg.append("g");
+
+    var populateById = {};
+    var stateIdAndNameMap = {};
+    var stateNameAndIdMap = {};
+    d3.tsv("assets/data/uk-counties.tsv", function(error, states) {
+        states.forEach(function(d) {
+            stateIdAndNameMap[d.id] = d.name;
+            stateNameAndIdMap[d.name] = d.id;
+            console.log(d.id + ":" + d.name);
         });
-        
-        function newDataReceived(newData) {
-            var jsonData = JSON.parse(newData);
-            jsonData.sentiment = parseInt(jsonData.sentiment);
-            var id = stateNameAndIdMap[jsonData.stateCode]
-            populateById[id] = jsonData.sentiment;
-            redraw();
-        }
+    });
 
-        function stop() {
-            socket._onclose(null);
-        }
+    function newDataReceived(newData) {
+        var jsonData = JSON.parse(newData);
+        jsonData.sentiment = parseInt(jsonData.sentiment);
+        console.log(jsonData.stateCode);
+        populateById[jsonData.stateCode] = jsonData.sentiment;
+        console.log(jsonData.sentiment);
+        redraw();
+    }
 
-        function start() {
-            socket.start();
-        }
+    function stop() {
+        socket._onclose(null);
+    }
 
-        $(function () {
-            $('#start').on('click', function (e) {
-                start();
-            });
-            $('#stop').on('click', function (e) {
-                stop();
-            });
+    function start() {
+        socket.start();
+    }
+
+    $(function () {
+        $('#start').on('click', function (e) {
+            start();
         });
+        $('#stop').on('click', function (e) {
+            stop();
+        });
+    });
 
-        var socket = {
-            start: function () {
-                var location = "ws://localhost:9292/stormUK";
-                this._ws = new WebSocket(location);
-                this._ws.onmessage = this._onmessage;
-                this._ws.onclose = this._onclose;
-            },
+    var socket = {
+        start: function () {
+            var location = "ws://localhost:9292/stormUK";
+            this._ws = new WebSocket(location);
+            this._ws.onmessage = this._onmessage;
+            this._ws.onclose = this._onclose;
+        },
 
-            _onmessage: function (m) {
-                if (m.data) {
-                    //var theData = m.data;
-                    newDataReceived(m.data);
-                }
-            },
-
-            _onclose: function (m) {
-                if (this._ws) {
-                    this._ws.close();
-                }
+        _onmessage: function (m) {
+            if (m.data) {
+                //var theData = m.data;
+                newDataReceived(m.data);
             }
-        };
+        },
 
-        function stop() {
-            socket._onclose(null);
+        _onclose: function (m) {
+            if (this._ws) {
+                this._ws.close();
+            }
         }
+    };
 
-        function start() {
-            socket.start();
-        }
+    function stop() {
+        socket._onclose(null);
+    }
 
-        function redraw() {
+    function start() {
+        socket.start();
+    }
 
-	        d3.json('assets/data/us-states.json', function(error, topology) {
-	            var countries = topojson.feature(topology, topology.objects.states).features;
-                svg.selectAll(".sentimentry").remove()
-                svg.selectAll("text").remove();
-                svg.selectAll("g.legend").remove();
+    function redraw() {
 
-	            g.selectAll(".sentimentry").data(countries).enter().append("path")
-	            .attr("class", "land-boundary").attr("d", path).style("fill", function(d) {
-	                var value = populateById[d.id];
-	                    //If the value is undefined, D3 shows the value as undefined in black color. Hence redefining value as 0.
-	                    if (value === undefined) {
-	                        value = 0;
-	                    }
-	                    return color(value);
-	                }).on("mouseover", function(d) {
-	                    var value = populateById[d.id];
-	                            if (value === undefined) {
-	                                value = 0;
-	                            }
-	                            d3.select(this).transition().duration(300)
-	                            .style("opacity", 1);
-	                            div.transition().duration(300).style("opacity",
-	                                                                 1)
-	                            div.text(stateIdAndNameMap[d.id] + " : " + value)
-	                            .style("left", (d3.event.pageX) + "px")
-	                            .style("top",
-	                                   (d3.event.pageY - 30) + "px");
-	                        }).on("mouseout", function() {
-	                            d3.select(this)
-	                            div.transition().duration(300).style("opacity", 0);
-	                        });
+        d3.json('assets/data/uk.json', function(error, uk) {
+            var subunits = topojson.feature(uk, uk.objects.layer1);
+            svg.selectAll(".subunit").remove()
+            svg.selectAll("text").remove();
+            svg.selectAll("g.legend").remove();
 
-	                        g.selectAll("text")
-							    .data(countries)
-							    .enter()
-							    .append("text")
-							    .text(function(d){
-							        return stateIdAndCodeMap[parseInt(d.id)];
-							    })
-							    .attr("x", function(d){
-							        return path.centroid(d)[0];
-							    })
-							    .attr("y", function(d){
-							        return  path.centroid(d)[1];
-							    })
-							    .attr("text-anchor","middle")
-							    .attr('font-size','9pt');
+            g.selectAll(".subunit").data(subunits.features).enter().append("path")
+                    .attr("class", function(d) {
+                        return "subunit " + d.properties.adm1_code;
+                    })
+                    .attr("d", path)
+                    .attr('fill', function(d){
+                        //return color(getCount(d.properties.adm1_code, counts));
+                        // alert(colors(d.properties.adm1_code in populateById ? populateById[d.properties.adm1_code] : 0));
+                        return colors(d.properties.adm1_code in populateById ? populateById[d.properties.adm1_code] : 0);
+                        //return "#DDD";
+                    })
+                    .on("mousemove", function(d,i) {
+                        tooltip.transition()
+                                .duration(300)
+                                .style("opacity", 1);
+                        tooltip
+                                .text(d.properties.name + ": " + (d.properties.adm1_code in populateById ? populateById[d.properties.adm1_code] : 0))
+                                .style( "left", (d3.event.pageX) + "px")
+                                .style("top", (d3.event.pageY - 30) + "px");
 
-	                        g.append("path").datum(topojson.mesh(topology, topology.objects.states, function(
-	                                                             a, b) {
-	                                                return a !== b;
-	                                            })).attr("class", "state-boundary").attr("d", path);
+                    })
+                    .on("mouseout",  function() { tooltip.style("opacity", 0); });
 
-	                        var legend = svg.selectAll("g.legend").data(ext_color_domain)
-	                        .enter().append("g").attr("class", "legend");
+            g.append("path")
+                .datum(topojson.mesh(uk, uk.objects.layer1, function(a, b) { return a !== b && a.properties.adm0_a3 !== "IRL"; }))
+                .attr("d", path)
+                .attr("class", "subunit-boundary");
 
-	                        var ls_w = 20, ls_h = 20;
+            g.append("path")
+                .datum(topojson.mesh(uk, uk.objects.layer1, function(a, b) { return a === b && a.properties.adm0_a3 === "IRL"; }))
+                .attr("d", path)
+                .attr("class", "subunit-boundary IRL");
 
-	                        legend.append("rect").attr("x", 35).attr("y", function(d, i) {
-	                            return height - (i * ls_h) - 3.5 * ls_h;
-	                        }).attr("width", ls_w).attr("height", ls_h).style("fill",
-	                        function(d, i) {
-	                            return color(d);
-	                        }).style("opacity", 0.8);
+            g.selectAll("text")
+                    .data(subunits.features)
+                    .enter()
+                    .append("text")
+                    .text(function(d){
+                        return stateIdAndNameMap[d.id];
+                    })
+                    .attr("x", function(d){
+                        return path.centroid(d)[0];
+                    })
+                    .attr("y", function(d){
+                        return  path.centroid(d)[1];
+                    })
+                    .attr("text-anchor","middle")
+                    .attr('font-size','9pt');
 
-	                        legend.append("text").attr("x", 65).attr("y", function(d, i) {
-	                            return height - (i * ls_h) - ls_h - 35;
-	                        }).style("fill", function(d) {
-	                            return "white";
-	                        }).text(function(d, i) {
-	                            return labels_for_legend[i];
-	                        });
-	        });
-        }
-        </script>
-    </body>
+            g.selectAll(".subunit-label")
+                    .data(subunits.features)
+                    .enter().append("text")
+                    .attr("class", function(d) { return "subunit-label " + d.properties.adm1_code; })
+                    .attr("transform", function(d) { return "translate(" + path.centroid(d) + ")"; })
+                    .attr("dy", ".35em");
+
+            var legend = svg.selectAll("g.legend")
+                    .data(ext_color_domain)
+                    .enter().append("g")
+                    .attr("class", "legend");
+
+            var ls_w = 20, ls_h = 20;
+
+            legend.append("rect")
+                    .attr("x", 20)
+                    .attr("y", function(d, i){ return height - (i*ls_h) - 2*ls_h;})
+                    .attr("width", ls_w)
+                    .attr("height", ls_h)
+                    .style("fill", function(d, i) { return d; })
+                    .style("opacity", 0.8);
+
+            legend.append("text")
+                    .attr("x", 50)
+                    .attr("y", function(d, i){ return height - (i*ls_h) - ls_h - 4;})
+                //.text(function(d, i){ return legend_labels[i]; });
+                    .text(function(d) {
+                        var r = colors.invertExtent(d);
+                        return (parseInt(r[0]) + ' to ' + parseInt(r[1]));
+                    });
+        });
+    }
+
+    var active = d3.select(null);
+    function reset() {
+        active.classed("active", false);
+        active = d3.select(null);
+
+        g.transition()
+                .duration(750)
+                .style("stroke-width", "1.5px")
+                .attr("transform", "");
+    }
+</script>
+</body>
 </html>

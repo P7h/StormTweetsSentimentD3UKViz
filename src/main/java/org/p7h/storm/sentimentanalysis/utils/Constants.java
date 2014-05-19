@@ -25,7 +25,7 @@ public final class Constants {
 
 	public static final String GOOGLE_MAPS_API_KEY = "GOOGLE_MAPS_API_KEY";
 
-	//Bolt reads the Bing Maps API Value and stores the same to GOOGLE_MAPS_API_KEY_VALUE of Constants.java so that it can be used for reverse geocoding.
+	//Bolt reads the Google Maps API Value and stores the same to GOOGLE_MAPS_API_KEY_VALUE of Constants.java so that it can be used for reverse geocoding.
 	//For the lack of time I am using this Constant or else using a good Design Pattern, this can be fine-tuned.
 	public static String GOOGLE_MAPS_API_KEY_VALUE = "GOOGLE_MAPS_API_KEY_VALUE";
 	public static String GOOGLE_MAPS_RESPONSE_OK = "OK";
