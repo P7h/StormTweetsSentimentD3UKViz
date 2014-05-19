@@ -22,10 +22,11 @@ This application has been tested in:<br>
 	* The coordinates object.
 	* The place object.
 	* The user object.
-* For reverse geocoding, this application uses Bing Maps API. 
+* For reverse geocoding, this application uses Google Maps API. 
 	* For more information and sign up, please check [Google Maps API page](https://google-developers.appspot.com/maps/documentation/geocoding/#ReverseGeocoding).
 	* Please note that you would need Google account for signing up for [Google Maps API key](https://google-developers.appspot.com/maps/documentation/geocoding/#api_key).
-	* Also, for [previous reverse geocoding](https://github.com/P7h/StormTweetsSentimentD3Viz), I chose Bing Maps and not Google Maps since Google Maps is too restrictive for our usage, as it has a limit of only 2500 requests per day. But Bing's geocoding for UK is really not upto the mark. Google Maps API is far better and translates almost every latlong request to a place. So, I have gone with Google Maps API due to accuracy. Just for the perspective, Bing Maps could convert only 3 out of 400 latlong request to a location. While Google Maps API converted almost 95% of the latlong requests to a location.
+	* Also, for [previous reverse geocoding](https://github.com/P7h/StormTweetsSentimentD3Viz), I chose Bing Maps and not Google Maps since Google Maps is too restrictive for our usage, as it has a limit of only 2500 requests per day. But Bing's geocoding for UK is really not upto the mark. Google Maps API is far better and translates almost every latlong request to a place. So, I have gone with Google Maps API due to accuracy. 
+    * Just for the perspective, Bing Maps could convert only 3 out of 400 latlong request to a location. While Google Maps API converted almost 95% of the latlong requests to a location.
 * This application uses [AFINN](http://www2.imm.dtu.dk/pubdb/views/publication_details.php?id=6010) which contains a list of pre-computed sentiment scores.
 	* These words are used to determine sentiment of the each tweet which is retrieved using Streaming API.
 * By understanding sentiment values, we can get the most happiest county / region of UK and most unhappiest county / region as well.
