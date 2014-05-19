@@ -84,13 +84,6 @@ public final class SentimentCalculatorBolt extends BaseRichBolt {
 		stateSentimentMap.put(state, previousSentiment);
 		//int stateId = Constants.MAP_STATE_CODE_ID.get(state);
 		_outputCollector.emit(new Values(state, previousSentiment));
-        try {
-            Files.append("\nEmitting:" + new DateTime() + "==>" + state + ":" + previousSentiment,
-                    new File("D:/tweet.txt"),
-                    Charsets.UTF_8);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 //        LOGGER.info("{}:{}", state, previousSentiment);
 	}
 

@@ -95,7 +95,7 @@ public final class StateLocatorBolt extends BaseRichBolt {
 			//LOGGER.info("Skipping invalid State: {}.", state);
 			return Optional.absent();
 		}
-		LOGGER.debug("State:{}", state);
+		//LOGGER.debug("State:{}", state);
 		return Optional.of(state);
 	}
 
@@ -119,7 +119,7 @@ public final class StateLocatorBolt extends BaseRichBolt {
 			final Optional<String> stateGeoOptional = GoogleMapsLookup.reverseGeocodeFromLatLong(latitude, longitude);
 			if(stateGeoOptional.isPresent()){
 				final String stateFromGeoLocation = stateGeoOptional.get();
-				LOGGER.debug("State from GoogleMaps:{}", stateFromGeoLocation);
+				//LOGGER.debug("State from GoogleMaps:{}", stateFromGeoLocation);
                 state = Constants.MAP_STATE_CODE_NAME.getOrDefault(stateFromGeoLocation, null);
 			}
 		}

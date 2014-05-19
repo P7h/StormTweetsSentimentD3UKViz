@@ -1,9 +1,6 @@
 # StormTweetsSentimentD3UKViz
 ----------
 
-## This is a Work in progress 
-![WIP](http://www.picgifs.com/graphics/w/work-in-progress/graphics-work-in-progress-589795.gif)
-
 ## Introduction
 This repository contains an application which is built to demonstrate as an example of Storm distributed framework by performing sentiment analysis of tweets originating from U.K. in real-time. This Topology retrieves tweets originating from UK and computes and visualizes the sentiment scores of each of the county / region of United States [based on tweets] in a Choropleth Map using [D3.js](http://d3js.org) continuously for 10 minutes [in local mode]. User can also explicitly kill the topology by pressing `Ctrl+C` for exiting the application.
 
@@ -36,7 +33,7 @@ This application has been tested in:<br>
 
 ## Demo of UK Twitter Sentiment Visualization
 ### GIF of D3 Choropleth Visualization
-WIP. Will be added soon.
+![GIF animation of D3 Visualization](D3_Viz.gif)
 
 ### Screenshot of D3 Choropleth Visualization
 ![Screenshot of D3 Visualization](D3_Viz.png)

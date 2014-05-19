@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Prashanth Babu on 5/15/2014.
+ * Created by 078831 on 5/15/2014.
  */
 public class GoogleMapsLookup {
     private static final Logger LOGGER = LoggerFactory.getLogger(GoogleMapsLookup.class);
@@ -43,14 +43,7 @@ public class GoogleMapsLookup {
                 .append(latitude)
                 .append(",")
                 .append(longitude);
-		LOGGER.debug("GoogleMapsURL==>{}", googleMapsURL.toString());
-        try {
-            Files.append("\nURL:" + new DateTime() + "==>" + googleMapsURL.toString(),
-                    new File("D:/tweet.txt"),
-                    Charsets.UTF_8);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+		//LOGGER.debug("GoogleMapsURL==>{}", googleMapsURL.toString());
         HttpURLConnection httpURLConnection;
         InputStream inputStream = null;
         try {
@@ -88,13 +81,6 @@ public class GoogleMapsLookup {
                 final List<Map<String, Object>> results = (List<Map<String, Object>>) googleResponse.get("results");
                 if(results != null && results.size() > 0){
                     final String resources = (String) results.get(0).get("formatted_address");
-                    try {
-                        Files.append("\nStateName:" + new DateTime() + "==>" + resources,
-                                new File("D:/tweet.txt"),
-                                Charsets.UTF_8);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
                     return Optional.of(resources.replace(", UK", ""));
                 }
             }
@@ -107,7 +93,7 @@ public class GoogleMapsLookup {
 }
 
 /*
-https://maps.googleapis.com/maps/api/geocode/json?latlng=51.6884939,-4.1554822&sensor=false&result_type=administrative_area_level_2&key=<<GMAPS_API_KEY>>
+https://maps.googleapis.com/maps/api/geocode/json?latlng=51.6884939,-4.1554822&sensor=false&result_type=administrative_area_level_2&key=<YOUR_GMAPS_API_KEY>
 {
     "results": [
         {
