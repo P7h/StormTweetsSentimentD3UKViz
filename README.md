@@ -36,6 +36,7 @@ This application has been tested in:<br>
 
 ## Demo of UK Twitter Sentiment Visualization
 ### GIF of D3 Choropleth Visualization
+WIP. Will be added soon.
 
 ### Screenshot of D3 Choropleth Visualization
 ![Screenshot of D3 Visualization](D3_Viz.png)
