@@ -1,0 +1,234 @@
+id	name
+GBR-2001	East Ayrshire
+GBR-2002	East Dunbartonshire
+GBR-2003	East Renfrewshire
+GBR-2004	Glasgow
+GBR-2005	Inverclyde
+GBR-2006	North Ayshire
+GBR-2007	North Lanarkshire
+GBR-2008	Renfrewshire
+GBR-2009	South Ayrshire
+GBR-2010	South Lanarkshire
+GBR-2011	West Dunbartonshire
+GBR-2012	Aberdeen
+GBR-2013	Aberdeenshire
+GBR-2014	Moray
+GBR-2015	Falkirk
+GBR-2016	Stirling
+GBR-2017	Clackmannanshire
+GBR-2018	Perthshire and Kinross
+GBR-2019	Angus
+GBR-2020	Dundee
+GBR-2021	Fife
+GBR-2022	East Lothian
+GBR-2023	Edinburgh
+GBR-2024	Midlothian
+GBR-2025	West Lothian
+GBR-2026	Scottish Borders
+GBR-2028	Darlington
+GBR-2029	Durham
+GBR-2030	Hartlepool
+GBR-2031	Middlesbrough
+GBR-2032	Redcar and Cleveland
+GBR-2033	Stockton-on-Tees
+GBR-2034	Northumberland
+GBR-2035	Hampshire
+GBR-2036	Southampton
+GBR-2038	Milton Keynes
+GBR-2039	Gloucestershire
+GBR-2040	Buckinghamshire
+GBR-2042	Hertfordshire
+GBR-2043	Bath and North East Somerset
+GBR-2044	Bristol
+GBR-2045	North Somerset
+GBR-2046	South Gloucestershire
+GBR-2047	Somerset
+GBR-2048	Devon
+GBR-2050	Bournemouth
+GBR-2051	Dorset
+GBR-2052	Poole
+GBR-2053	Cambridgeshire
+GBR-2054	Leicestershire
+GBR-2055	Kingston upon Hull
+GBR-2056	North East Lincolnshire
+GBR-2057	North Lincolnshire
+GBR-2058	Derby
+GBR-2059	Derbyshire
+GBR-2060	Barking and Dagenham
+GBR-2061	Bexley
+GBR-2062	Brent
+GBR-2063	Bromley
+GBR-2064	Camden
+GBR-2065	Croydon
+GBR-2066	Ealing
+GBR-2067	Enfield
+GBR-2068	Greenwich
+GBR-2069	Hammersmith and Fulham
+GBR-2070	Hounslow
+GBR-2071	Islington
+GBR-2072	Kensington and Chelsea
+GBR-2073	Merton
+GBR-2074	Redbridge
+GBR-2075	Richmond upon Thames
+GBR-2076	Sutton
+GBR-2077	Tower Hamlets
+GBR-2078	Waltham Forest
+GBR-2079	Wandsworth
+GBR-2080	Westminster
+GBR-2081	Lincolnshire
+GBR-2082	Belfast
+GBR-2083	Derry
+GBR-2084	Omagh
+GBR-2085	Armagh
+GBR-2086	Newry and Mourne
+GBR-2087	Banbridge
+GBR-2088	Craigavon
+GBR-2089	Dungannon
+GBR-2090	Lisburn
+GBR-2091	Cookstown
+GBR-2092	Antrim
+GBR-2093	Magherafelt
+GBR-2094	Ballymena
+GBR-2095	Larne
+GBR-2096	Carrickfergus
+GBR-2097	Newtownabbey
+GBR-2098	North Down
+GBR-2099	Down
+GBR-2100	Coleraine
+GBR-2101	Ballymoney
+GBR-2102	Limavady
+GBR-2103	Castlereagh
+GBR-2104	Carmarthenshire
+GBR-2105	Ceredigion
+GBR-2106	Pembrokeshire
+GBR-2108	Halton
+GBR-2110	Cornwall
+GBR-2111	Powys
+GBR-2112	Bridgend
+GBR-2113	Caerphilly
+GBR-2114	Merthyr Tydfil
+GBR-2115	Rhondda
+GBR-2116	Cardiff
+GBR-2117	Vale of Glamorgan
+GBR-2118	Neath Port Talbot
+GBR-2119	Swansea
+GBR-2120	York
+GBR-2121	Telford and Wrekin
+GBR-2122	Blackburn with Darwen
+GBR-2123	Lancashire
+GBR-2124	East Riding of Yorkshire
+GBR-2125	Denbighshire
+GBR-2126	Flintshire
+GBR-2127	Wrexham
+GBR-2128	Anglesey
+GBR-2129	Conwy
+GBR-2130	Gwynedd
+GBR-2131	Blaenau Gwent
+GBR-2132	Monmouthshire
+GBR-2133	Newport
+GBR-2134	Torfaen
+GBR-2135	Strabane
+GBR-2136	Fermanagh
+GBR-2137	Ards
+GBR-2138	Dumfries and Galloway
+GBR-2139	Cumbria
+GBR-2140	North Yorkshire
+GBR-2141	Plymouth
+GBR-2142	Torbay
+GBR-2317	Essex
+GBR-2318	Suffolk
+GBR-2319	Norfolk
+GBR-2674	Brighton and Hove
+GBR-2675	Havering
+GBR-2676	Thurrock
+GBR-2677	East Sussex
+GBR-2678	Medway
+GBR-2679	Southend-on-Sea
+GBR-2744	Orkney
+GBR-2745	Highland
+GBR-2746	Argyll and Bute
+GBR-2747	Shetland Islands
+GBR-2748	West Sussex
+GBR-2749	Northamptonshire
+GBR-2750	Warwickshire
+GBR-2751	Oxfordshire
+GBR-2752	Luton
+GBR-2753	Hillingdon
+GBR-2754	Kingston upon Thames
+GBR-2755	Surrey
+GBR-2756	Swindon
+GBR-2757	Wiltshire
+GBR-2758	Isle of Wight
+GBR-2759	Portsmouth
+GBR-2760	Peterborough
+GBR-2761	Leicester
+GBR-2762	Rutland
+GBR-2763	Nottingham
+GBR-2764	Nottinghamshire
+GBR-2765	Hackney
+GBR-2766	Haringey
+GBR-2767	Harrow
+GBR-2768	Lambeth
+GBR-2769	Lewisham
+GBR-2770	Newham
+GBR-2771	Southwark
+GBR-2772	Eilean Siar
+GBR-2773	Moyle
+GBR-2774	Warrington
+GBR-2775	Herefordshire
+GBR-2776	Worcestershire
+GBR-2777	Staffordshire
+GBR-2778	Stoke-on-Trent
+GBR-2779	Shropshire
+GBR-3409	Kent
+GBR-4809	City
+GBR-5661	Newcastle upon Tyne
+GBR-5662	North Tyneside
+GBR-5663	South Tyneside
+GBR-5664	Sunderland
+GBR-5665	Gateshead
+GBR-5666	Knowsley
+GBR-5667	Sefton
+GBR-5668	Liverpool
+GBR-5669	Merseyside
+GBR-5670	Blackpool
+GBR-5671	Kirklees
+GBR-5672	Calderdale
+GBR-5673	Bradford
+GBR-5674	Leeds
+GBR-5675	Wakefield
+GBR-5676	Salford
+GBR-5677	Wigan
+GBR-5678	Bolton
+GBR-5679	Bury
+GBR-5680	Rochdale
+GBR-5681	Oldham
+GBR-5682	Tameside
+GBR-5683	Stockport
+GBR-5684	Manchester
+GBR-5685	Trafford
+GBR-5686	Rotherham
+GBR-5687	Sheffield
+GBR-5688	Barnsley
+GBR-5689	Doncaster
+GBR-5690	Birmingham
+GBR-5691	Sandwell
+GBR-5692	Dudley
+GBR-5693	Wolverhampton
+GBR-5694	Walsall
+GBR-5695	Solihull
+GBR-5696	Coventry
+GBR-5697	Central Bedfordshire
+GBR-5698	Bedford
+GBR-5699	Reading
+GBR-5700	West Berkshire
+GBR-5701	Wokingham
+GBR-5702	Bracknell Forest
+GBR-5703	Royal Borough of Windsor and Maidenhead
+GBR-5704	Slough
+GBR-5705	Barnet
+GBR-5706	Cheshire East
+GBR-5707	Cheshire West and Chester
+GBR-5708	Halton
+GBR-5988	Isles of Scilly
+IMN+00	Isle of Man
