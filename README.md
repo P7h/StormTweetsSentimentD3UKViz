@@ -1,6 +1,8 @@
 # StormTweetsSentimentD3UKViz
 ----------
 
+### You might also be interested in checking out my other project, Twitter sentiment of States of US on a D3.js Choropleth Map on [StormTweetsSentimentD3Viz](https://github.com/P7h/StormTweetsSentimentD3Viz).
+
 ## Introduction
 This repository contains an application which is built to demonstrate as an example of Storm distributed framework by performing sentiment analysis of tweets originating from U.K. in real-time. This Topology retrieves tweets originating from UK and computes and visualizes the sentiment scores of each of the county / region of United States [based on tweets] in a Choropleth Map using [D3.js](http://d3js.org) continuously for 10 minutes [in local mode]. User can also explicitly kill the topology by pressing `Ctrl+C` for exiting the application.
 
@@ -30,6 +32,8 @@ This application has been tested in:<br>
 * For visualization, I am using D3 to display the sentiment value of each county / region in real-time by conveying it in a color, appropriate to the sentiment value. Color of the county / region moves from Red to green, as the sentiment value decreases. 
 * This codebase has been updated with decent comments, wherever required.
 * Also this project has been made compatible with both Eclipse IDE and IntelliJ IDEA. Import the project in your favorite IDE [which has Maven plugin installed] and you can quickly follow the code.
+
+Note: Huge thanks to my colleague [Ganesh Sastry](https://plus.google.com/u/0/+GaneshSastry) for his help on generating the TopoJSON of UK and the UK map right.
 
 ## Demo of UK Twitter Sentiment Visualization
 ### GIF of D3 Choropleth Visualization
