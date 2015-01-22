@@ -32,7 +32,7 @@ import java.util.Random;
  */
 public final class StateLocatorBolt extends BaseRichBolt {
 	private static final Logger LOGGER = LoggerFactory.getLogger(StateLocatorBolt.class);
-    private static final long serialVersionUID = -8097813984907419942L;
+	private static final long serialVersionUID = 335100368035784611L;
     private OutputCollector _outputCollector;
 
 	public StateLocatorBolt() {

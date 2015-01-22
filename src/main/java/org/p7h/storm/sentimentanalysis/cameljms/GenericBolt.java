@@ -11,7 +11,7 @@ import java.util.Map;
 
 @SuppressWarnings("serial")
 public class GenericBolt extends BaseRichBolt {
-    private static final long serialVersionUID = -3408183882931608130L;
+    private static final long serialVersionUID = -3651461232152576151L;
     private OutputCollector collector;
     private boolean autoAck = false;
     private boolean autoAnchor = false;

@@ -25,7 +25,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 public final class TwitterSpout extends BaseRichSpout {
 	private static final Logger LOGGER = LoggerFactory.getLogger(TwitterSpout.class);
-    private static final long serialVersionUID = -1590819539847344427L;
+	private static final long serialVersionUID = -6815379407002113362L;
 
     private SpoutOutputCollector _outputCollector;
     private LinkedBlockingQueue<Status> _queue;

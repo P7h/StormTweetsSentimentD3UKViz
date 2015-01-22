@@ -1,14 +1,10 @@
 package org.p7h.storm.sentimentanalysis.utils;
 
-import com.google.common.base.Charsets;
 import com.google.common.base.Optional;
-import com.google.common.io.Files;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -19,7 +15,7 @@ import java.util.Map;
 /**
  * Created by 078831 on 5/15/2014.
  */
-public class GoogleMapsLookup {
+public final class GoogleMapsLookup {
     private static final Logger LOGGER = LoggerFactory.getLogger(GoogleMapsLookup.class);
     private static final String GOOGLE_MAPS_URL = "https://maps.googleapis.com/maps/api/geocode/json?sensor=false&result_type=administrative_area_level_2&location_type=APPROXIMATE&key=";
 

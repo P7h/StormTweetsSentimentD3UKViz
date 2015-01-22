@@ -7,7 +7,7 @@ import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
 
 public class SpringJmsProvider implements JmsProvider {
-    private static final long serialVersionUID = 2198261240300136509L;
+    private static final long serialVersionUID = -1472817053829756850L;
     private ConnectionFactory connectionFactory;
     private Destination destination;
 

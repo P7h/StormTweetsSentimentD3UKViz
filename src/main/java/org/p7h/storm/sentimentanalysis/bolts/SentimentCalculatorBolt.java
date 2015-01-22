@@ -11,16 +11,13 @@ import com.google.common.base.Charsets;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.common.io.Files;
 import com.google.common.io.Resources;
-import org.joda.time.DateTime;
 import org.p7h.storm.sentimentanalysis.utils.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import twitter4j.Status;
 import twitter4j.URLEntity;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -35,8 +32,8 @@ import java.util.SortedMap;
  */
 public final class SentimentCalculatorBolt extends BaseRichBolt {
 	private static final Logger LOGGER = LoggerFactory.getLogger(SentimentCalculatorBolt.class);
-    private static final long serialVersionUID = 1942195527233725767L;
-    private OutputCollector _outputCollector;
+	private static final long serialVersionUID = 1770701025256459938L;
+	private OutputCollector _outputCollector;
 
 	private SortedMap<String,Integer> afinnSentimentMap = null;
 	private SortedMap<String,Integer> stateSentimentMap = null;
